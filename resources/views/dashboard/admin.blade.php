@@ -31,7 +31,7 @@
 @endif
 <hr>
 <h1>Team members: {{ $companyUsers->count() }}</h1><br>
-<a href="/user/create" class="bg-blue-500 text-white px-4 py-2 rounded" style="background: cornflowerblue;">Add Team Member</a>
+<a href="/users/create" class="bg-blue-500 text-white px-4 py-2 rounded" style="background: cornflowerblue;">Add Team Member</a>
 @if($companyUsers->count() > 0)
 
 <table border="1" cellpadding="10">

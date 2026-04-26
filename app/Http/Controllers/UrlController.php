@@ -15,13 +15,18 @@ class UrlController extends Controller
     public function index()
     {
         $user = auth()->user();
-        if ($user->role === 'SuperAdmin') {
-            $sortUrls = Url::latest()->with('user')->paginate(10);
-            //return view('dashboard.admin', compact('sortUrls'));
-        } else {
-            $companyUrls = Url::where('company_id', $user->company_id)->latest()->with('user')->paginate(10);
-            return view('urls.index', compact('companyUrls'));
+        if ($user->role == 'SuperAdmin') {
+            abort(403);
         }
+
+        if ($user->role === 'Admin') {
+            $companyId = $user->company_id;
+            $companyUrls = Url::where('company_id', $companyId)->latest()->with('user')->paginate(10);
+        }else{
+            $companyUrls = Url::where('user_id', $user->id)->latest()->with('user')->paginate(10);
+        }
+
+        return view('urls.index', compact('companyUrls'));
     }
 
     public function create()

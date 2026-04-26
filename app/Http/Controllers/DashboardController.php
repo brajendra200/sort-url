@@ -52,7 +52,7 @@ class DashboardController extends Controller
         if ($user->role === 'Member') {
             $companyId = $user->company_id;
 
-            $sortUrls = Url::where('company_id', $companyId)
+            $sortUrls = Url::where('user_id', $user->id)
                 ->with('user:id,name')
                 ->latest()
                 ->limit(5)
